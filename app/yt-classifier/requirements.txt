@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+validators
+furl
+psutil
+python-multipart

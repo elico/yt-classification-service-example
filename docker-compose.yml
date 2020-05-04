@@ -1,0 +1,45 @@
+version: '3.3'
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile        
+    restart: always
+    environment:
+      DEBUG: '0'
+      LISTS_PATH: "/var/lib/yt-classifier/lists"
+    ports:
+      - '5000:5000'
+    expose:
+      - '5000'
+    networks:
+      - services
+    volumes:
+      - yt-classifier-lists:/var/lib/yt-classifier
+
+  redwood:
+    build:
+      context: ./redwood
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '8080:8080'
+    expose:
+      - '8080'
+    volumes:
+      - redwood-config:/etc/redwood
+      - redwood-data:/var/lib/redwood
+      - redwood-logs:/var/log/redwood 
+    networks:
+      - services
+
+
+volumes:
+  yt-classifier-lists:
+  redwood-config:
+  redwood-data:
+  redwood-logs:
+
+networks:
+  services:

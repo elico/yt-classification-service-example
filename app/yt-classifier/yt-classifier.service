@@ -1,0 +1,18 @@
+[Unit]
+Description=Uvicorn instance to serve yt-classifer
+After=network.target
+
+[Service]
+User=nginx
+Group=nginx
+LimitNOFILE=65535
+WorkingDirectory=/var/www/yt-classifier/
+Environment="PATH=/var/www/yt-classifier/yt-classifier-env/bin"
+Environment="DEBUG=0"
+Environment="AUTODETECT_CPU=1"
+Environment="LISTS_PATH=/var/lib/yt-classifier/lists"
+
+ExecStart=/var/www/yt-classifier/venv/bin/python3 /var/www/yt-classifier/run.py
+
+[Install]
+WantedBy=multi-user.target
