@@ -15,7 +15,7 @@ RUN /bin/bash /init-local-rootca.sh
 
 FROM alpine:latest
 
-RUN apk add --no-cache curl git vim bash wget patch tar supervisor && rm  -rf /tmp/* /var/cache/apk/*
+RUN apk add --no-cache curl git vim bash wget patch tar supervisor ca-certificates openssl && rm  -rf /tmp/* /var/cache/apk/*
 
 ADD supervisord.conf /etc/
 
